@@ -6,8 +6,9 @@
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-pose": "^4.0.8",
+    "react-router-dom": "^4.4.0",
     "react-scripts": "2.1.8",
-    "uniqid": "^5.0.3"
+    "axios": "latest"
   },
   "scripts": {
     "start": "react-scripts start",
