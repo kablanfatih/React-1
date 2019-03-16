@@ -11,6 +11,12 @@ const reducer = (state, action) => {
                 ...state,
                 users: state.users.filter(user => action.payload !== user.id)
             };
+
+        case "ADD_USER":
+            return {
+                ...state,
+                users : [...state.users, action.payload]
+            }
         default:
             return state;
     }
@@ -21,19 +27,19 @@ const reducer = (state, action) => {
     state = {
         users: [
             {
-                id : 1,
+                id : "1",
                 name : "Javascript ",
                 salary : "50002",
                 department : "Bilişim"
             },
             {
-                id : 2,
+                id : "2",
                 name : "React ",
                 salary : "5300",
                 department : "Bilişim"
             },
             {
-                id : 3,
+                id : "3",
                 name : "React-Native",
                 salary : "5000",
                 department : "Bilişim"
