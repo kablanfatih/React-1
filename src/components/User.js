@@ -8,6 +8,15 @@ class User extends Component {
         salary: "Bilgi Yok",
         department: "Bilgi Yok"
     };
+    state = {
+        isVisible : false
+    };
+    onClickEvent = (e) =>{
+
+        this.setState({
+            isVisible : !this.state.isVisible
+        })
+    };
 
     onDeleteUser = (dispatch, e) => {
         const {id} = this.props;
@@ -19,6 +28,7 @@ class User extends Component {
     render() {
         // Destructing
         const {name, department, salary} = this.props;
+        const {isVisible} = this.state;
 
         return <UserConsumer>
             {
@@ -27,16 +37,17 @@ class User extends Component {
 
                     return (
                         <div className="col-md-8 mb-4">
-                            <div className="card">
+                            <div className="card" style={isVisible ? {backgroundColor : "#62848d", color : "white"} : null}>
                                 <div className="card-header d-flex justify-content-beetween">
-                                    <h4 className="d-inline">{name}</h4>
-                                    <i className="far fa-trash-alt pull-left" style={{cursor: "pointer"}}
+                                    <h4 className="d-inline" onClick={this.onClickEvent}>{name}</h4>
+                                    <i className="far fa-trash-alt" style={{cursor: "pointer"}}
                                        onClick={this.onDeleteUser.bind(this, dispatch)}/>
                                 </div>
+                                {isVisible ?
                                 <div className="card-body">
                                     <p className="card-text">Maaş: {salary}</p>
                                     <p className="card-text">Department: {department}</p>
-                                </div>
+                                </div> : null}
                             </div>
 
                         </div>
@@ -45,9 +56,6 @@ class User extends Component {
 
             }
         </UserConsumer>
-
-        /*
-          );*/
     }
 }
 

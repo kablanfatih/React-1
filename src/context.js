@@ -22,19 +22,19 @@ const reducer = (state, action) => {
         users: [
             {
                 id : 1,
-                name : "Fatih ",
+                name : "Javascript ",
                 salary : "50002",
                 department : "Bilişim"
             },
             {
                 id : 2,
-                name : "Cevdet ",
+                name : "React ",
                 salary : "5300",
                 department : "Bilişim"
             },
             {
                 id : 3,
-                name : "Veli",
+                name : "React-Native",
                 salary : "5000",
                 department : "Bilişim"
             }
