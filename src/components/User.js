@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import UserConsumer from "../context";
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 class User extends Component {
     static defaultProps = {
@@ -12,14 +13,14 @@ class User extends Component {
     state = {
         isVisible : false
     };
-    onClickEvent = (e) =>{
+    onClickEvent = () =>{
 
         this.setState({
             isVisible : !this.state.isVisible
         })
     };
 
-    onDeleteUser = async (dispatch, e) => {
+    onDeleteUser = async (dispatch) => {
         const {id} = this.props;
         await axios.delete(`http://localhost:3001/users/${id}`);
         dispatch({type : "DELETE_USER", payload : id})
@@ -28,7 +29,7 @@ class User extends Component {
 
     render() {
         // Destructing
-        const {name, department, salary} = this.props;
+        const {id, name, department, salary} = this.props;
         const {isVisible} = this.state;
 
         return <UserConsumer>
@@ -48,6 +49,7 @@ class User extends Component {
                                 <div className="card-body">
                                     <p className="card-text">Maaş: {salary}</p>
                                     <p className="card-text">Department: {department}</p>
+                                    <Link to = {`edit/${id}`} className="btn btn-dark btn-block" >Update User</Link>
                                 </div> : null}
                             </div>
 

@@ -29,7 +29,7 @@ class AddUser extends Component {
         salary: ""
     };
 
-    changeVisibility = (e) => {
+    changeVisibility = () => {
 
         this.setState({
             visible: !this.state.visible
@@ -43,6 +43,7 @@ class AddUser extends Component {
     };
 
     addUser = async (dispatch, e) => {
+        e.preventDefault();
 
         const {name, department, salary} = this.state;
 
@@ -56,7 +57,7 @@ class AddUser extends Component {
 
         dispatch({type: "ADD_USER",payload:response.data});
 
-        e.preventDefault();
+        this.props.history.push("/");
     };
 
     /*changeName = (e) => {

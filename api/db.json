@@ -11,6 +11,24 @@
       "name": "React ",
       "salary": "5300",
       "department": "Bilişim"
+    },
+    {
+      "name": "Java",
+      "salary": "23423",
+      "department": "bilişöm",
+      "id": "vc221Pr"
+    },
+    {
+      "name": "kablanfatihSivas",
+      "salary": "324235",
+      "department": "bilişim",
+      "id": "cUH6NU7"
+    },
+    {
+      "name": "Fatih KABLAN",
+      "salary": "fsd",
+      "department": "fsdf",
+      "id": "wSYzBKk"
     }
   ]
 }
