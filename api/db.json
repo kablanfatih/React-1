@@ -1,0 +1,16 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "Javascript ",
+      "salary": "50002",
+      "department": "Bilişim"
+    },
+    {
+      "id": "2",
+      "name": "React ",
+      "salary": "5300",
+      "department": "Bilişim"
+    }
+  ]
+}
