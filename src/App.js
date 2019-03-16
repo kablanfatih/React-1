@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import './App.css';
-import Navbar from "./components/Navbar";
+import Navbar from "./layout/Navbar";
 import Users from "./components/Users";
 import AddUser from "./components/AddUser";
-import NotFound from "./components/NotFound";
+import NotFound from "./pages/NotFound";
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
+import Contribute from "./pages/Contribute";
 
 class App extends Component {
 
@@ -17,6 +18,7 @@ class App extends Component {
                     <Switch>
                         <Route exact path="/" component={Users}/>
                         <Route exact path="/adduser" component={AddUser}/>
+                        <Route exact path="/github" component={Contribute} />
                         <Route component={NotFound}/>
                     </Switch>
                 </div>

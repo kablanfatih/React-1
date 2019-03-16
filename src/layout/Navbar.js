@@ -1,6 +1,6 @@
 import React from  "react";
 import PropTypes from "prop-types";
-import {BrowserRouter as Router, Link} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 const Navbar = props => {
 
@@ -13,6 +13,9 @@ const Navbar = props => {
                 </li>
                 <li>
                     <Link to = "/adduser">Add User</Link>
+                </li>
+                <li>
+                    <Link to = "/github">Project Files</Link>
                 </li>
             </ul>
         </div>
