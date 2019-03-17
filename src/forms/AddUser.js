@@ -3,22 +3,22 @@ import posed from 'react-pose';
 import UserConsumer from "../context";
 import axios from "axios";
 
-const Animation = posed.div(
-    {
-        visible: {
-            opacity: 1,
-            applyAtStart: {
-                display: "block"
-            }
-        },
-        hidden: {
-            opacity: 0,
-            applyAtEnd: {
-                display: "none"
-            }
+const Animation = posed.div({
+
+    visible: {
+        opacity: 1,
+        applyAtStart: {
+            display: "block"
+        }
+    },
+    hidden: {
+        opacity: 0,
+        applyAtEnd: {
+            display: "none"
         }
     }
-);
+});
+
 
 class AddUser extends Component {
 
@@ -26,7 +26,8 @@ class AddUser extends Component {
         visible: true,
         name: "",
         department: "",
-        salary: ""
+        salary: "",
+        error: false
     };
 
     changeVisibility = () => {
@@ -36,9 +37,17 @@ class AddUser extends Component {
         });
     };
 
+    validateForm = () => {
+
+        const {name, salary, department} = this.state;
+
+        return !(name === "" || salary === "" || department === "");
+
+    };
+
     changeInput = (e) => {
         this.setState({
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     };
 
@@ -53,9 +62,16 @@ class AddUser extends Component {
             department
         };
 
+        if (!this.validateForm()) {
+            this.setState({
+                error: true
+            });
+            return;
+        }
+
         const response = await axios.post("http://localhost:3001/users", newUser);
 
-        dispatch({type: "ADD_USER",payload:response.data});
+        dispatch({type: "ADD_USER", payload: response.data});
 
         this.props.history.push("/");
     };
@@ -81,7 +97,7 @@ class AddUser extends Component {
     };*/
 
     render() {
-        const {visible, name, department, salary} = this.state;
+        const {visible, name, department, salary, error} = this.state;
 
         return <UserConsumer>
 
@@ -102,32 +118,39 @@ class AddUser extends Component {
                                         <h4>Add User Form</h4>
                                     </div>
                                     <div className="card-body">
-
-                                        <form onSubmit={this.addUser.bind(this, dispatch)}>
-                                            <div className="form-group">
-                                                <label htmlFor="name">Name</label>
-                                                <input type="text" name="name" id="id" placeholder="Enter Name"
-                                                       className="form-control" value={name} onChange={this.changeInput}/>
-                                            </div>
-                                            <div className="form-group">
-                                                <label htmlFor="name">Department</label>
-                                                <input type="text" name="department" id="department" placeholder="Enter department"
-                                                       className="form-control" value={department}
-                                                       onChange={this.changeInput}/>
-                                            </div>
-                                            <div className="form-group">
-                                                <label htmlFor="name">Salary</label>
-                                                <input type="text" name="salary" id="salary" placeholder="Enter salary"
-                                                       className="form-control" value={salary} onChange={this.changeInput}/>
-                                            </div>
-                                            <button className="btn btn-danger btn-block" type="submit">Add User</button>
-                                        </form>
-                                    </div>
+                                        {
+                                            error ?
+                                                <div className="alert alert-danger">Lütfen Bilgilerinizi Kontrol
+                                                    Ediniz</div>
+                                                : null
+                                        }
+                                    <form onSubmit={this.addUser.bind(this, dispatch)}>
+                                        <div className="form-group">
+                                            <label htmlFor="name">Name</label>
+                                            <input type="text" name="name" id="id" placeholder="Enter Name"
+                                                   className="form-control" value={name} onChange={this.changeInput}/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="name">Department</label>
+                                            <input type="text" name="department" id="department"
+                                                   placeholder="Enter department"
+                                                   className="form-control" value={department}
+                                                   onChange={this.changeInput}/>
+                                        </div>
+                                        <div className="form-group">
+                                            <label htmlFor="name">Salary</label>
+                                            <input type="text" name="salary" id="salary" placeholder="Enter salary"
+                                                   className="form-control" value={salary} onChange={this.changeInput}/>
+                                        </div>
+                                        <button className="btn btn-danger btn-block" type="submit">Add User</button>
+                                    </form>
                                 </div>
-                            </Animation>
-
                         </div>
-                    );
+                </Animation>
+
+                </div>
+                )
+                    ;
                 }
             }
         </UserConsumer>

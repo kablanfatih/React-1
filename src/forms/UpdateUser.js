@@ -9,7 +9,8 @@ class UpdateUser extends Component {
     state = {
         name: "",
         department: "",
-        salary: ""
+        salary: "",
+        error: false
     };
     changeInput = (e) => {
         this.setState({
@@ -31,6 +32,13 @@ class UpdateUser extends Component {
          });
      };
 
+    validateForm = () => {
+
+        const {name, salary, department} = this.state;
+
+        return !(name === "" || salary === "" || department === "");
+
+    };
 
     updateUser = async (dispatch, e) => {
         e.preventDefault();
@@ -43,6 +51,14 @@ class UpdateUser extends Component {
             salary,
             department
         };
+
+        if (!this.validateForm()) {
+            this.setState({
+                error: true
+            });
+            return;
+        }
+
         const response = await axios.put(`http://localhost:3001/users/${id}`,updatedUser);
 
         dispatch({type: "UPDATE_USER", payload : response.data});
@@ -52,7 +68,7 @@ class UpdateUser extends Component {
     };
 
     render() {
-        const {name, department, salary} = this.state;
+        const {name, department, salary, error} = this.state;
 
         return <UserConsumer>
 
@@ -69,6 +85,13 @@ class UpdateUser extends Component {
                                         <h4>Update User Form</h4>
                                     </div>
                                     <div className="card-body">
+
+                                        {
+                                            error ?
+                                                <div className="alert alert-danger">Lütfen Bilgilerinizi Kontrol
+                                                    Ediniz</div>
+                                                : null
+                                        }
 
                                         <form onSubmit={this.updateUser.bind(this, dispatch)}>
                                             <div className="form-group">
